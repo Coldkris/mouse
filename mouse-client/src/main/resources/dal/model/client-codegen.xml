@@ -5,5 +5,6 @@
 		<attribute name="enabled" value-type="boolean"/>
 		<attribute name="dump-locked" value-type="boolean"/>
 		<entity-ref name="server" type="list" names="servers" xml-indent="true"/>
+		<entity-ref name="domain" type="list" names="domains"/>
 	</entity>
 </model>

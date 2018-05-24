@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model>
+	<entity name="config" root="true">
+		<attribute name="mode" value-type="String"/>
+		<attribute name="enabled" value-type="boolean"/>
+		<attribute name="dump-locked" value-type="boolean"/>
+	
+	</entity>
+</model>

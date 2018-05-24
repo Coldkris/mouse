@@ -4,6 +4,6 @@
 		<attribute name="mode" value-type="String"/>
 		<attribute name="enabled" value-type="boolean"/>
 		<attribute name="dump-locked" value-type="boolean"/>
-	
+		<entity-ref name="server" type="list" names="servers" xml-indent="true"/>
 	</entity>
 </model>

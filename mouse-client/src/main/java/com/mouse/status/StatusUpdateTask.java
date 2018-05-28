@@ -153,7 +153,7 @@ public class StatusUpdateTask implements Task, Initializable {
     }
 
     public void setInterval(long interval) {
-        interval = interval;
+        this.interval = interval;
     }
 
 }

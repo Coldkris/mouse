@@ -36,4 +36,34 @@ public class OsInfo {
 
     }
 
+    public void setTotalPhysicalMemory(long totalPhysicalMemorySize) {
+        // TODO Auto-generated method stub
+
+    }
+
+    public void setFreePhysicalMemory(long freePhysicalMemorySize) {
+        // TODO Auto-generated method stub
+
+    }
+
+    public void setTotalSwapSpace(long totalSwapSpaceSize) {
+        // TODO Auto-generated method stub
+
+    }
+
+    public void setFreeSwapSpace(long freeSwapSpaceSize) {
+        // TODO Auto-generated method stub
+
+    }
+
+    public void setProcessTime(long processCpuTime) {
+        // TODO Auto-generated method stub
+
+    }
+
+    public void setCommittedVirtualMemory(long committedVirtualMemorySize) {
+        // TODO Auto-generated method stub
+
+    }
+
 }

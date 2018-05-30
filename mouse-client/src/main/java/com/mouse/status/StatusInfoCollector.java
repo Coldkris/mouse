@@ -15,6 +15,7 @@ import java.lang.management.ThreadInfo;
 import java.lang.management.ThreadMXBean;
 import java.util.Date;
 import java.util.List;
+import java.util.TreeMap;
 
 import com.mouse.message.configuration.client.entity.Extension;
 import com.mouse.message.configuration.client.entity.StatusInfo;
@@ -130,12 +131,12 @@ public class StatusInfoCollector extends BaseVisitor {
 
     @Override
     public void visitMessage(MessageInfo message) {
-        Extension catExtension = statusInfo.findOrCreateExtension("CatUsage");
+        Extension mouseExtension = statusInfo.findOrCreateExtension("MouseUsage");
 
         if (mStatistics != null) {
-            catExtension.findOrCreateExtensionDetail("Produced").setValue(mStatistics.getProdeced());
-            catExtension.findOrCreateExtensionDetail("Overflowed").setValue(mStatistics.getOverflowed());
-            catExtension.findOrCreateExtensionDetail("Bytes").setValue(mStatistics.getBytes());
+            mouseExtension.findOrCreateExtensionDetail("Produced").setValue(mStatistics.getProdeced());
+            mouseExtension.findOrCreateExtensionDetail("Overflowed").setValue(mStatistics.getOverflowed());
+            mouseExtension.findOrCreateExtensionDetail("Bytes").setValue(mStatistics.getBytes());
         }
     }
 
@@ -226,7 +227,7 @@ public class StatusInfoCollector extends BaseVisitor {
         thread.setDump(getThreadDump(threads));
 
         frameworkThread.findOrCreateExtensionDetail("HttpThread").setValue(jbossThreadsCount + jettyThreadsCount);
-        frameworkThread.findOrCreateExtensionDetail("CatThread").setValue(countThreadsByPrefix(threads, "Cat-"));
+        frameworkThread.findOrCreateExtensionDetail("MouseThread").setValue(countThreadsByPrefix(threads, "Mouse-"));
         frameworkThread.findOrCreateExtensionDetail("PigeonThread").setValue(countThreadsByPrefix(threads, "Pigeon-", "DPSF-", "Netty-", "Client-ResponseProcessor"));
         frameworkThread.findOrCreateExtensionDetail("ActiveThread").setValue(bean.getThreadCount());
         frameworkThread.findOrCreateExtensionDetail("StartedThread").setValue(bean.getTotalStartedThreadCount());
@@ -235,33 +236,62 @@ public class StatusInfoCollector extends BaseVisitor {
     }
 
     private String getThreadDump(ThreadInfo[] threads) {
-        // TODO Auto-generated method stub
-        return null;
+        StringBuilder sb = new StringBuilder(32768);
+        int index = 1;
+
+        TreeMap<String, ThreadInfo> sortedThreads = new TreeMap<>();
+
+        for (ThreadInfo thread : threads) {
+            sortedThreads.put(thread.getThreadName(), thread);
+        }
+
+        for (ThreadInfo thread : sortedThreads.values()) {
+            sb.append(index++).append(": ").append(thread);
+        }
+        return sb.toString();
     }
 
-    private double countThreadsByPrefix(ThreadInfo[] threads, String string) {
-        // TODO Auto-generated method stub
-        return 0;
+    private int countThreadsBySubstring(ThreadInfo[] threads, String... substrings) {
+        int count = 0;
+
+        for (ThreadInfo thread : threads) {
+            for (String str : substrings) {
+                if (thread.getThreadName().contains(str)) {
+                    count++;
+                }
+            }
+        }
+        return count;
     }
 
-    private int countThreadsBySubstring(ThreadInfo[] threads, String string) {
-        // TODO Auto-generated method stub
-        return 0;
+    private int countThreadsByPrefix(ThreadInfo[] threads, String... prefixes) {
+        int count = 0;
+
+        for (ThreadInfo thread : threads) {
+            for (String prefix : prefixes) {
+                if (thread.getThreadName().startsWith(prefix)) {
+                    count++;
+                }
+            }
+        }
+        return count;
     }
 
-    private double countThreadsByPrefix(ThreadInfo[] threads, String string, String string2, String string3, String string4) {
-        // TODO Auto-generated method stub
-        return 0;
-    }
+    private boolean isInstanceOfInterface(Class<?> clazz, String interfaceName) {
+        if (clazz == Object.class) {
+            return false;
+        } else if (clazz.getName().equals(interfaceName)) {
+            return true;
+        }
 
-    private int countThreadsByPrefix(ThreadInfo[] threads, String string, String string2) {
-        // TODO Auto-generated method stub
-        return 0;
-    }
+        Class<?>[] interfaceclasses = clazz.getInterfaces();
 
-    private boolean isInstanceOfInterface(Class<? extends OperatingSystemMXBean> class1, String string) {
-        // TODO Auto-generated method stub
-        return false;
+        for (Class<?> interfaceclass : interfaceclasses) {
+            if (isInstanceOfInterface(interfaceclass, interfaceName)) {
+                return true;
+            }
+        }
+        return isInstanceOfInterface(clazz.getSuperclass(), interfaceName);
     }
 
 }

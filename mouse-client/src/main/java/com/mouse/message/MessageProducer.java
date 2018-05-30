@@ -11,10 +11,10 @@ package com.mouse.message;
  * <li>Event
  * <pre>
  * public class MyClass { 
- *    public static MessageFactory CAT = Cat.getFactory();
+ *    public static MessageFactory MOUSE = Mouse.getFactory();
  * 
  *    public void bizMethod() { 
- *       Event event = CAT.newEvent("Review", "New");
+ *       Event event = MOUSE.newEvent("Review", "New");
  * 
  *       event.addData("id", 12345); 
  *       event.addData("user", "john");
@@ -30,10 +30,10 @@ package com.mouse.message;
  * <li>Heartbeat
  * <pre>
  * public class MyClass { 
- *    public static MessageFactory CAT = Cat.getFactory();
+ *    public static MessageFactory MOUSE = Mouse.getFactory();
  * 
  *    public void bizMethod() { 
- *       Heartbeat event = CAT.newHeartbeat("System", "Status");
+ *       Heartbeat event = MOUSE.newHeartbeat("System", "Status");
  * 
  *       event.addData("ip", "192.168.10.111");
  *       event.addData("host", "host-1");
@@ -52,10 +52,10 @@ package com.mouse.message;
  * <li>Transaction
  * <pre>
  * public class MyClass { 
- *    public static MessageFactory CAT = Cat.getFactory();
+ *    public static MessageFactory MOUSE = Mouse.getFactory();
  * 
  *    public void bizMethod() { 
- *       Transaction t = CAT.newTransaction("URL", "MyPage");
+ *       Transaction t = MOUSE.newTransaction("URL", "MyPage");
  * 
  *       try {
  *          // do your business here
@@ -82,10 +82,10 @@ package com.mouse.message;
  * <li>Event
  * <pre>
  * public class MyClass { 
- *    public static MessageFactory CAT = Cat.getFactory();
+ *    public static MessageFactory MOUSE = Mouse.getFactory();
  * 
  *    public void bizMethod() { 
- *       CAT.logEvent("Review", "New", "0", "id=12345&user=john");
+ *       MOUSE.logEvent("Review", "New", "0", "id=12345&user=john");
  *    }
  *    ...
  * }
@@ -95,10 +95,10 @@ package com.mouse.message;
  * <li>Heartbeat
  * <pre>
  * public class MyClass { 
- *    public static MessageFactory CAT = Cat.getFactory();
+ *    public static MessageFactory MOUSE = Mouse.getFactory();
  * 
  *    public void bizMethod() { 
- *       CAT.logHeartbeat("System", "Status", "0", "ip=192.168.10.111&host=host-1&load=2.1&cpu=0.12,0.10&memory.total=2G&memory.free=456M");
+ *       MOUSE.logHeartbeat("System", "Status", "0", "ip=192.168.10.111&host=host-1&load=2.1&cpu=0.12,0.10&memory.total=2G&memory.free=456M");
  *    }
  *    ...
  * }
@@ -179,12 +179,11 @@ public interface MessageProducer {
 
     /**
      * 记录一次Metric
-     * @param type           类型
      * @param name           名字
      * @param status         状态，"0"表示成功，其他表示失败
      * @param nameValuePairs 格式如"a=1&b=2&..."的名称值对
      */
-    public void logMetric(String type, String name, String status, String nameValuePairs);
+    public void logMetric(String name, String status, String nameValuePairs);
 
     /**
      * 用给定的类型和名称创建一个新的Event

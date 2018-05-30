@@ -22,11 +22,11 @@ import com.mouse.status.StatusUpdateTask;
 /**
  * 
  * @author kris
- * @version $Id: CatClientModule.java, v 0.1 2018年5月24日 上午10:14:38 kris Exp $
+ * @version $Id: MouseClientModule.java, v 0.1 2018年5月24日 上午10:14:38 kris Exp $
  */
-public class CatClientModule extends AbstractModule {
+public class MouseClientModule extends AbstractModule {
 
-    public static final String ID = "cat-client";
+    public static final String ID = "mouse-client";
 
     @Override
     public Module[] getDependencies(ModuleContext ctx) {
@@ -42,9 +42,9 @@ public class CatClientModule extends AbstractModule {
         MilliSecondTimer.initialize();
 
         // 跟踪线程启动/停止
-        Threads.addListener(new CatThreadListener(ctx));
+        Threads.addListener(new MouseThreadListener(ctx));
 
-        // CAT启动准备
+        // Mouse启动准备
         Mouse.getInstance().setContainer(((DefaultModuleContext) ctx).getContainer());
 
         // 
@@ -52,12 +52,12 @@ public class CatClientModule extends AbstractModule {
 
         ClientConfigManager clientConfigManager = ctx.lookup(ClientConfigManager.class);
 
-        if (clientConfigManager.isCatEnabled()) {
+        if (clientConfigManager.isMouseEnabled()) {
 
             // 启动状态更新任务
             StatusUpdateTask statusUpdateTask = ctx.lookup(StatusUpdateTask.class);
 
-            Threads.forGroup("cat").start(statusUpdateTask);
+            Threads.forGroup("mouse").start(statusUpdateTask);
 
             // 等待10ms
             LockSupport.parkNanos(10 * 1000 * 1000L);
@@ -65,11 +65,11 @@ public class CatClientModule extends AbstractModule {
 
     }
 
-    public static final class CatThreadListener extends AbstractThreadListener {
+    public static final class MouseThreadListener extends AbstractThreadListener {
 
         private final ModuleContext mCtx;
 
-        private CatThreadListener(ModuleContext ctx) {
+        private MouseThreadListener(ModuleContext ctx) {
             mCtx = ctx;
         }
 

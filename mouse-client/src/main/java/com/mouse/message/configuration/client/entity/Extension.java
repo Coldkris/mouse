@@ -18,4 +18,9 @@ public class Extension {
         return null;
     }
 
+    public Extension setDescription(String des) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
 }

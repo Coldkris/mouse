@@ -7,6 +7,9 @@ package com.mouse.status;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.Calendar;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import org.unidal.helper.Threads.Task;
 import org.unidal.lookup.annotation.Inject;
@@ -20,6 +23,7 @@ import com.mouse.message.MessageProducer;
 import com.mouse.message.Transaction;
 import com.mouse.message.configuration.ClientConfigManager;
 import com.mouse.message.configuration.NetworkInterfaceManager;
+import com.mouse.message.configuration.client.entity.Extension;
 import com.mouse.message.configuration.client.entity.StatusInfo;
 import com.mouse.message.internal.MilliSecondTimer;
 import com.mouse.message.spi.MessageStatistics;
@@ -48,7 +52,7 @@ public class StatusUpdateTask implements Task, Initializable {
     @Override
     public void run() {
 
-        // 等待cat client初始化成功
+        // 等待mouse client初始化成功
         try {
             Thread.sleep(10 * 1000);
         } catch (InterruptedException e) {
@@ -87,13 +91,60 @@ public class StatusUpdateTask implements Task, Initializable {
         while (active) {
             long start = MilliSecondTimer.currentTimeMillis();
 
-            if (cManager.isCatEnabled()) {
+            if (cManager.isMouseEnabled()) {
                 Transaction t = mouse.newTransaction("System", "Status");
                 Heartbeat h = mouse.newHeartbeat("Heartbeat", ipAddress);
                 StatusInfo status = new StatusInfo();
 
                 t.addData("dumpLocked", cManager.isDumpLocked());
 
+                try {
+                    StatusInfoCollector statusInfoCollector = new StatusInfoCollector(mStatistics, jars);
+
+                    status.accept(statusInfoCollector.setDumpLocked(cManager.isDumpLocked()));
+
+                    buildExtensionData(status);
+                    h.addData(status.toString());
+                    h.setStatus(Message.SUCCESS);
+                } catch (Throwable e) {
+                    h.setStatuc(e);
+                    mouse.logError(e);
+                } finally {
+                    h.complete();
+                }
+                t.setStatus(Message.SUCCESS);
+                t.complete();
+            }
+            long elapsed = MilliSecondTimer.currentTimeMillis() - start;
+
+            if (elapsed < interval) {
+                try {
+                    Thread.sleep(interval - elapsed);
+                } catch (InterruptedException e) {
+                    break;
+                }
+            }
+        }
+
+    }
+
+    private void buildExtensionData(StatusInfo status) {
+        StatusExtensionRegister register = StatusExtensionRegister.getInstance();
+        List<StatusExtension> extensions = register.getStatusExtension();
+
+        for (StatusExtension extension : extensions) {
+            String id = extension.getId();
+            String des = extension.getDescription();
+            Map<String, String> properties = extension.getProperties();
+            Extension item = status.findOrCreateExtension(id).setDescription(des);
+
+            for (Entry<String, String> entry : properties.entrySet()) {
+                try {
+                    double value = Double.parseDouble(entry.getValue());
+                    item.findOrCreateExtensionDetail(entry.getKey()).setValue(value);
+                } catch (Exception e) {
+                    Mouse.logError("状态扩展只能是double类型", e);
+                }
             }
         }
 

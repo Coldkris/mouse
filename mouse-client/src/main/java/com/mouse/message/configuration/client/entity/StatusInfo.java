@@ -6,6 +6,7 @@ package com.mouse.message.configuration.client.entity;
 
 import java.util.Date;
 
+import com.mouse.status.StatusInfoCollector;
 import com.mouse.status.model.entity.DiskInfo;
 import com.mouse.status.model.entity.MemoryInfo;
 import com.mouse.status.model.entity.MessageInfo;
@@ -61,6 +62,11 @@ public class StatusInfo {
     }
 
     public void setThread(ThreadsInfo threadsInfo) {
+        // TODO Auto-generated method stub
+
+    }
+
+    public void accept(StatusInfoCollector setDumpLocked) {
         // TODO Auto-generated method stub
 
     }

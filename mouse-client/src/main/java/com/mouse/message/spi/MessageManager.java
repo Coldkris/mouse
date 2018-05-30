@@ -8,7 +8,7 @@ import com.mouse.message.Message;
 import com.mouse.message.Transaction;
 
 /**
- * 用于构建CAT消息的消息管理器
+ * 用于构建Mouse消息的消息管理器
  * <p>
  * 注意：此方法仅供内部使用。 应用程序开发人员不应直接调用此方法。
  * @author kris
@@ -23,7 +23,7 @@ public interface MessageManager {
     public void add(Message message);
 
     /**
-     * 在事务结束时触发，无论它是根事务还是嵌套事务。 但是，如果它是根事务，则它将异步刷新到后端CAT服务器。
+     * 在事务结束时触发，无论它是根事务还是嵌套事务。 但是，如果它是根事务，则它将异步刷新到后端Mouse服务器。
      * <p>
      * @param transaction
      */
@@ -54,14 +54,14 @@ public interface MessageManager {
     public boolean isMessageEnabled();
 
     /**
-     * 检查CAT记录是启用还是禁用。
-     * @return 如果CAT已启用，则返回true
+     * 检查Mouse记录是启用还是禁用。
+     * @return 如果Mouse已启用，则返回true
      */
-    public boolean isCatEnabled();
+    public boolean isMouseEnabled();
 
     /**
-     * 检查CAT跟踪模式是启用还是禁用。
-     * @return 如果CAT启动跟踪模式，则返回true
+     * 检查Mouse跟踪模式是启用还是禁用。
+     * @return 如果Mouse启动跟踪模式，则返回true
      */
     public boolean isTraceMode();
 
@@ -71,7 +71,7 @@ public interface MessageManager {
     public void reset();
 
     /**
-     * 设置CAT跟踪模式。
+     * 设置Mouse跟踪模式。
      * @param traceMode
      */
     public void setTradeMode(boolean traceMode);

@@ -55,10 +55,10 @@ public interface ClientConfigManager {
     public void initialize(File configFile) throws Exception;
 
     /**
-     * Cat是否启动
+     * Mouse是否启动
      * @return
      */
-    public boolean isCatEnabled();
+    public boolean isMouseEnabled();
 
     /**
      * TODO

@@ -17,16 +17,16 @@ import org.unidal.lookup.extension.Initializable;
 import org.unidal.lookup.extension.InitializationException;
 
 import com.mouse.Mouse;
+import com.mouse.configuration.ClientConfigManager;
+import com.mouse.configuration.NetworkInterfaceManager;
 import com.mouse.message.Heartbeat;
 import com.mouse.message.Message;
 import com.mouse.message.MessageProducer;
 import com.mouse.message.Transaction;
-import com.mouse.message.configuration.ClientConfigManager;
-import com.mouse.message.configuration.NetworkInterfaceManager;
-import com.mouse.message.configuration.client.entity.Extension;
-import com.mouse.message.configuration.client.entity.StatusInfo;
 import com.mouse.message.internal.MilliSecondTimer;
 import com.mouse.message.spi.MessageStatistics;
+import com.mouse.status.model.entity.Extension;
+import com.mouse.status.model.entity.StatusInfo;
 
 /**
  * 状态更新任务
@@ -107,7 +107,7 @@ public class StatusUpdateTask implements Task, Initializable {
                     h.addData(status.toString());
                     h.setStatus(Message.SUCCESS);
                 } catch (Throwable e) {
-                    h.setStatuc(e);
+                    h.setStatus(e);
                     mouse.logError(e);
                 } finally {
                     h.complete();

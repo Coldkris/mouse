@@ -14,7 +14,7 @@ import org.unidal.initialization.DefaultModuleContext;
 import org.unidal.initialization.Module;
 import org.unidal.initialization.ModuleContext;
 
-import com.mouse.message.configuration.ClientConfigManager;
+import com.mouse.configuration.ClientConfigManager;
 import com.mouse.message.internal.MilliSecondTimer;
 import com.mouse.message.io.TransportManager;
 import com.mouse.status.StatusUpdateTask;

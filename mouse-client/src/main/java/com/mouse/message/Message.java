@@ -96,6 +96,6 @@ public interface Message {
      * 用异常类名设置消息状态
      * @param e
      */
-    public void setStatuc(Throwable e);
+    public void setStatus(Throwable e);
 
 }

@@ -2,7 +2,7 @@
  * CATµÄĞ¡ÀÏÊó
  * Copyright (c) 1995-2018 All Rights Reserved.
  */
-package com.mouse.message.configuration;
+package com.mouse.configuration;
 
 import org.unidal.helper.Inets;
 

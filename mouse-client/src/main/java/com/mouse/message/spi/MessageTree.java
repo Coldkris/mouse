@@ -141,9 +141,9 @@ public interface MessageTree extends Cloneable {
 
     /**
      * 设置线程组名
-     * @param name
+     * @param threadGroupName
      */
-    public void setThreadGroupName(String name);
+    public void setThreadGroupName(String threadGroupName);
 
     /**
      * 设置线程id
@@ -153,9 +153,9 @@ public interface MessageTree extends Cloneable {
 
     /**
      * 设置线程名
-     * @param id
+     * @param threadName
      */
-    public void setThreadName(String id);
+    public void setThreadName(String threadName);
 
     /**
      * TODO

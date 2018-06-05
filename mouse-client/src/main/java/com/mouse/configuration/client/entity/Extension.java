@@ -2,7 +2,7 @@
  * CATµÄĞ¡ÀÏÊó
  * Copyright (c) 1995-2018 All Rights Reserved.
  */
-package com.mouse.message.configuration.client.entity;
+package com.mouse.configuration.client.entity;
 
 import com.mouse.status.model.entity.ExtensionDetail;
 

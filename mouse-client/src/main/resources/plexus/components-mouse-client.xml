@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plexus>
+	<components>
+		<component>
+			<role>com.mouse.configuration.ClientConfigManager</role>
+			<implementation>com.mouse.configuration.DefaultClientConfigManager</implementation>
+		</component>
+		<component>
+			<role>com.mouse.message.internal.MessageIdFactory</role>
+			<implementation>com.mouse.message.internal.MessageIdFactory</implementation>
+		</component>
+		<component>
+			<role>com.mouse.message.spi.MessageManager</role>
+			<implementation></implementation>
+		</component>
+	</components>
+</plexus>

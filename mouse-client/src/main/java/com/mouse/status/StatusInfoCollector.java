@@ -17,16 +17,16 @@ import java.util.Date;
 import java.util.List;
 import java.util.TreeMap;
 
-import com.mouse.message.configuration.client.entity.Extension;
-import com.mouse.message.configuration.client.entity.StatusInfo;
 import com.mouse.message.spi.MessageStatistics;
 import com.mouse.status.model.entity.DiskInfo;
 import com.mouse.status.model.entity.DiskVolumeInfo;
+import com.mouse.status.model.entity.Extension;
 import com.mouse.status.model.entity.GcInfo;
 import com.mouse.status.model.entity.MemoryInfo;
 import com.mouse.status.model.entity.MessageInfo;
 import com.mouse.status.model.entity.OsInfo;
 import com.mouse.status.model.entity.RuntimeInfo;
+import com.mouse.status.model.entity.StatusInfo;
 import com.mouse.status.model.entity.ThreadsInfo;
 import com.mouse.status.model.transform.BaseVisitor;
 

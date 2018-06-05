@@ -2,13 +2,13 @@
  * CAT的小老鼠
  * Copyright (c) 1995-2018 All Rights Reserved.
  */
-package com.mouse.message.configuration;
+package com.mouse.configuration;
 
 import java.io.File;
 import java.util.List;
 
-import com.mouse.message.configuration.client.entity.Domain;
-import com.mouse.message.configuration.client.entity.Server;
+import com.mouse.configuration.client.entity.Domain;
+import com.mouse.configuration.client.entity.Server;
 
 /**
  * Client配置管理器

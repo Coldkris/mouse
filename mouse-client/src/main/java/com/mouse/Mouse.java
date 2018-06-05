@@ -263,6 +263,12 @@ public class Mouse {
         return Mouse.getProducer().createMessageId();
     }
 
+    public static boolean isInitialized() {
+        synchronized (instance) {
+            return instance.pContainer != null;
+        }
+    }
+
     // 线程开始时调用创建一些线程本地数据
     public static void setup(String sessionToken) {
         Mouse.getManager().setup();

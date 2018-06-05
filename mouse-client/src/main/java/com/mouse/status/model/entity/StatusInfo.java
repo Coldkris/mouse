@@ -2,17 +2,11 @@
  * CATµƒ–°¿œ Û
  * Copyright (c) 1995-2018 All Rights Reserved.
  */
-package com.mouse.message.configuration.client.entity;
+package com.mouse.status.model.entity;
 
 import java.util.Date;
 
 import com.mouse.status.StatusInfoCollector;
-import com.mouse.status.model.entity.DiskInfo;
-import com.mouse.status.model.entity.MemoryInfo;
-import com.mouse.status.model.entity.MessageInfo;
-import com.mouse.status.model.entity.OsInfo;
-import com.mouse.status.model.entity.RuntimeInfo;
-import com.mouse.status.model.entity.ThreadsInfo;
 
 /**
  * 

@@ -6,13 +6,16 @@ package com.mouse.message.io;
 
 import java.io.InputStream;
 import java.net.InetSocketAddress;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ThreadFactory;
 
 import org.unidal.helper.Files;
+import org.unidal.helper.Splitters;
 import org.unidal.helper.Threads.Task;
 import org.unidal.helper.Urls;
 import org.unidal.lookup.logging.Logger;
+import org.unidal.lookup.util.StringUtils;
 
 import com.mouse.configuration.ClientConfigManager;
 import com.mouse.configuration.KVConfig;
@@ -88,6 +91,27 @@ public class ChannelManager implements Task {
 
         String serverConfig = loadServerConfig();
 
+        if (StringUtils.isNotEmpty(serverConfig)) {
+            List<InetSocketAddress> configedAddresses = parseSocketAddress(serverConfig);
+        }
+
+    }
+
+    private List<InetSocketAddress> parseSocketAddress(String content) {
+        try {
+            List<String> strs = Splitters.by(";").noEmptyItem().split(content);
+            List<InetSocketAddress> address = new ArrayList<>();
+
+            for (String str : strs) {
+                List<String> items = Splitters.by(":").noEmptyItem().split(str);
+
+                address.add(new InetSocketAddress(items.get(0), Integer.parseInt(items.get(1))));
+            }
+            return address;
+        } catch (Exception e) {
+            logger.error(e.getMessage(), e);
+        }
+        return new ArrayList<>();
     }
 
     private String loadServerConfig() {

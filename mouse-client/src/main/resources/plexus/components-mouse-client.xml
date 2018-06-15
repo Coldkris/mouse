@@ -11,7 +11,39 @@
 		</component>
 		<component>
 			<role>com.mouse.message.spi.MessageManager</role>
-			<implementation></implementation>
+			<implementation>com.mouse.message.internal.DefaultMessageManager</implementation>
+			<requirements>
+				<requirement>
+					<role>com.mouse.configuration.ClientConfigManager</role>
+				</requirement>
+				<requirement>
+					<role>com.mouse.message.io.TransportManager</role>
+				</requirement>
+				<requirement>
+					<role>com.mouse.message.internal.MessageIdFactory</role>
+				</requirement>
+			</requirements>
+		</component>
+		<component>
+			<role>com.mouse.message.MessageProducer</role>
+			<implementation>com.mouse.message.internal.DefaultMessageProducer</implementation>
+			<requirements>
+				<requirement>
+					<role>com.mouse.message.spi.MessageManager</role>
+				</requirement>
+				<requirement>
+					<role>com.mouse.message.internal.MessageIdFactory</role>
+				</requirement>
+			</requirements>
+		</component>
+		<component>
+			<role>com.mouse.message.io.TcpSocketSender</role>
+			<implementation>com.mouse.message.io.TcpSocketSender</implementation>
+			<requirements>
+				<requirement>
+					<role></role>
+				</requirement>
+			</requirements>
 		</component>
 	</components>
 </plexus>

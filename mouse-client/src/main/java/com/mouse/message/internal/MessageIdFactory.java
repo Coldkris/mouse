@@ -43,7 +43,7 @@ public class MessageIdFactory {
 
     private BlockingQueue<String>  reusedIds = new LinkedBlockingQueue<>(100000);
 
-    public void initialized(String domain) throws IOException {
+    public void initialize(String domain) throws IOException {
         if (!isInitialized) {
             this.domain = domain;
 

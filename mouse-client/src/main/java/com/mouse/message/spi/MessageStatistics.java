@@ -32,7 +32,7 @@ public interface MessageStatistics {
     /**
      * TODO
      */
-    public void onBytes();
+    public void onBytes(int size);
 
     /**
      * »ñÈ¡Òç³ö

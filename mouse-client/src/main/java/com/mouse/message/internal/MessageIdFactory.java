@@ -164,7 +164,7 @@ public class MessageIdFactory {
         return mark;
     }
 
-    private void saveMark() {
+    public void saveMark() {
         if (isInitialized) {
             try {
                 byteBuffer.rewind();

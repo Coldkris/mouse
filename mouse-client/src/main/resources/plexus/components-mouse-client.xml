@@ -41,9 +41,22 @@
 			<implementation>com.mouse.message.io.TcpSocketSender</implementation>
 			<requirements>
 				<requirement>
-					<role></role>
+					<role>com.mouse.configuration.ClientConfigManager</role>
+				</requirement>
+				<requirement>
+					<role>com.mouse.message.internal.MessageIdFactory</role>
+				</requirement>
+				<requirement>
+					<role>com.mouse.message.spi.MessageStatistics</role>
+					<field-name>statistics</field-name>
+				</requirement>
+				<requirement>
+					<role>com.mouse.message.spi.MessageCodec</role>
+					<role-hint>plain-text</role-hint>
+					<field-name>codec</field-name>
 				</requirement>
 			</requirements>
 		</component>
+		
 	</components>
 </plexus>
